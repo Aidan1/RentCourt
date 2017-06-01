@@ -30,8 +30,8 @@ public class customerAgentGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        dbRoomType = new javax.swing.JComboBox<String>();
-        dbPlace = new javax.swing.JComboBox<String>();
+        dbVenue = new javax.swing.JComboBox<String>();
+        dbCourt = new javax.swing.JComboBox<String>();
         btnSearch = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -49,15 +49,15 @@ public class customerAgentGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Room Type");
+        jLabel1.setText("Venue");
         jLabel1.setToolTipText("");
 
-        jLabel2.setText("Place");
+        jLabel2.setText("Court");
         jLabel2.setToolTipText("");
 
-        dbRoomType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Single", "Double", "Single with Bathroom" }));
+        dbVenue.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Single", "Double", "Single with Bathroom" }));
 
-        dbPlace.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Johor", "Melacca", "Negeri Sembilan", "Selangor", "Perak", "Kedah", "Penang", "Perlis", "Kelantan", "Terengganu", "Pahang", "Sabah", "Sarawak", "Kuala Lumpur", " ", " " }));
+        dbCourt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Johor", "Melacca", "Negeri Sembilan", "Selangor", "Perak", "Kedah", "Penang", "Perlis", "Kelantan", "Terengganu", "Pahang", "Sabah", "Sarawak", "Kuala Lumpur", " ", " " }));
 
         btnSearch.setLabel("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -94,9 +94,9 @@ public class customerAgentGUI extends javax.swing.JFrame {
                                     .addComponent(jLabel2))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(dbPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dbRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 481, Short.MAX_VALUE)))
+                                    .addComponent(dbCourt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dbVenue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 423, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -105,11 +105,11 @@ public class customerAgentGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(dbRoomType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dbVenue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(dbPlace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dbCourt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSearch)
                 .addGap(18, 18, 18)
@@ -119,22 +119,22 @@ public class customerAgentGUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        dbRoomType.getAccessibleContext().setAccessibleName("dbRoomType");
-        dbRoomType.getAccessibleContext().setAccessibleDescription("");
-        dbPlace.getAccessibleContext().setAccessibleName("dbPlace");
-        dbPlace.getAccessibleContext().setAccessibleDescription("");
+        dbVenue.getAccessibleContext().setAccessibleName("dbRoomType");
+        dbVenue.getAccessibleContext().setAccessibleDescription("");
+        dbCourt.getAccessibleContext().setAccessibleName("dbPlace");
+        dbCourt.getAccessibleContext().setAccessibleDescription("");
         btnSearch.getAccessibleContext().setAccessibleName("btnSearch");
         btnSearch.getAccessibleContext().setAccessibleDescription("");
 
         mainPanel.addTab("Home", jPanel1);
 
-        jLabel4.setText("Available Rooms");
+        jLabel4.setText("Available Court");
 
         txtAvailableRoom.setColumns(20);
         txtAvailableRoom.setRows(5);
         jScrollPane2.setViewportView(txtAvailableRoom);
 
-        jLabel5.setText("Please insert room number.");
+        jLabel5.setText("Number of court: ");
 
         btnBook.setText("Book!");
         btnBook.addActionListener(new java.awt.event.ActionListener() {
@@ -208,8 +208,8 @@ public class customerAgentGUI extends javax.swing.JFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
 
-        setRoomType((String)dbRoomType.getSelectedItem());
-        setPlace((String)dbPlace.getSelectedItem());
+        setRoomType((String)dbVenue.getSelectedItem());
+        setPlace((String)dbCourt.getSelectedItem());
         
         txtLog.append("Selected Room Type: " + getRoomType() + "\n");
         txtLog.append("Selected Place: " + getPlace() + "\n");
@@ -287,8 +287,8 @@ public class customerAgentGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBook;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JComboBox<String> dbPlace;
-    private javax.swing.JComboBox<String> dbRoomType;
+    private javax.swing.JComboBox<String> dbCourt;
+    private javax.swing.JComboBox<String> dbVenue;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
