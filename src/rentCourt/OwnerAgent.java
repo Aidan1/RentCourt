@@ -1,5 +1,5 @@
 
-package rentroom;
+package rentCourt;
 
 import bean.Room;
 import bean.RentDetail;

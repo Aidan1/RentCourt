@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rentroom;
+package rentCourt;
 
 public class customerAgentGUI extends javax.swing.JFrame {
 
@@ -30,8 +30,8 @@ public class customerAgentGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        dbRoomType = new javax.swing.JComboBox<>();
-        dbPlace = new javax.swing.JComboBox<>();
+        dbRoomType = new javax.swing.JComboBox<String>();
+        dbPlace = new javax.swing.JComboBox<String>();
         btnSearch = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -55,9 +55,9 @@ public class customerAgentGUI extends javax.swing.JFrame {
         jLabel2.setText("Place");
         jLabel2.setToolTipText("");
 
-        dbRoomType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single", "Double", "Single with Bathroom" }));
+        dbRoomType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Single", "Double", "Single with Bathroom" }));
 
-        dbPlace.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Johor", "Melacca", "Negeri Sembilan", "Selangor", "Perak", "Kedah", "Penang", "Perlis", "Kelantan", "Terengganu", "Pahang", "Sabah", "Sarawak", "Kuala Lumpur", " ", " " }));
+        dbPlace.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Johor", "Melacca", "Negeri Sembilan", "Selangor", "Perak", "Kedah", "Penang", "Perlis", "Kelantan", "Terengganu", "Pahang", "Sabah", "Sarawak", "Kuala Lumpur", " ", " " }));
 
         btnSearch.setLabel("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
