@@ -1,7 +1,7 @@
 
 package rentCourt;
 
-import bean.Room;
+import bean.Court;
 import bean.RentDetail;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
@@ -22,7 +22,7 @@ import java.util.zip.GZIPOutputStream;
 import org.apache.commons.codec.binary.Base64;
 
 public class OwnerAgent extends Agent {
-    private Room room = new Room();
+    private Court room = new Court();
     static final Base64 base64 = new Base64();
     
     public String serializeObjectToString(Object object) throws IOException {

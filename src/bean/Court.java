@@ -8,7 +8,7 @@ package bean;
 import java.io.Serializable;
 import jade.core.AID;
 
-public class Room implements Serializable{
+public class Court implements Serializable{
     
     private String type;
     private String place;

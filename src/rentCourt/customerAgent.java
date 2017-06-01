@@ -1,7 +1,7 @@
 
 package rentCourt;
 
-import bean.Room;
+import bean.Court;
 import bean.RentDetail;
 import jade.core.AID;
 import jade.core.Agent;
@@ -28,7 +28,7 @@ public class customerAgent extends Agent{
     
     static final Base64 base64 = new Base64();
     private customerAgentGUI custAgentGUI;
-    private ArrayList<Room> rooms = new ArrayList<>();
+    private ArrayList<Court> rooms = new ArrayList<>();
     private ArrayList<AID> salesman = new ArrayList<>();
     private RentDetail rentdetail;
     
@@ -175,7 +175,7 @@ public class customerAgent extends Agent{
   			if (sd.getType().equals("Salesman")) {
                             salesman.add(provider);
                             custAgentGUI.AppendLog("- Service \""+sd.getName()+"\" provided by agent "+provider.getName());
-                            Room room = new Room();
+                            Court room = new Court();
                             room.setType(custAgentGUI.getRoomType());
                             room.setPlace(custAgentGUI.getPlace());
                             

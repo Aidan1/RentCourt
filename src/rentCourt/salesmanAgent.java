@@ -1,7 +1,7 @@
 
 package rentCourt;
 
-import bean.Room;
+import bean.Court;
 import bean.RentDetail;
 import jade.core.AID;
 import jade.core.Agent;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class salesmanAgent extends Agent{
     
     static final Base64 base64 = new Base64();
-    private ArrayList<Room> rooms = new ArrayList<>();
+    private ArrayList<Court> rooms = new ArrayList<>();
     private ArrayList<AID> customers = new ArrayList<>();
     
     public String serializeObjectToString(Object object) throws IOException {
@@ -85,12 +85,12 @@ public class salesmanAgent extends Agent{
                  {
                      if(msg.getPerformative()==ACLMessage.REQUEST)
                      {
-                         Room room = new Room();
+                         Court room = new Court();
 
                          String msgContent = msg.getContent();
                          try
                          {
-                             room = (Room)deserializeObjectFromString(msgContent);  
+                             room = (Court)deserializeObjectFromString(msgContent);  
                          }
                          catch (Exception ex){
                          }
@@ -188,7 +188,7 @@ public class salesmanAgent extends Agent{
                     while (it.hasNext()) {
                         ServiceDescription sd = (ServiceDescription) it.next();
   			if (sd.getType().equals("Renting")) {
-                            Room temp = new Room();
+                            Court temp = new Court();
                             jade.util.leap.Iterator properties = sd.getAllProperties();
                             temp.setProvider(dfd.getName());
                             while(properties.hasNext()){
