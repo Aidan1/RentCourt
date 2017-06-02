@@ -55,9 +55,9 @@ public class customerAgentGUI extends javax.swing.JFrame {
         jLabel2.setText("Court");
         jLabel2.setToolTipText("");
 
-        dbVenue.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Single", "Double", "Single with Bathroom" }));
+        dbVenue.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Sports Kompleks 1", "Sports Kompleks 2", "Sports Kompleks 3" }));
 
-        dbCourt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Johor", "Melacca", "Negeri Sembilan", "Selangor", "Perak", "Kedah", "Penang", "Perlis", "Kelantan", "Terengganu", "Pahang", "Sabah", "Sarawak", "Kuala Lumpur", " ", " " }));
+        dbCourt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Badminton", "Squash", "Ping pong", " ", " ", " " }));
 
         btnSearch.setLabel("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +96,7 @@ public class customerAgentGUI extends javax.swing.JFrame {
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(dbCourt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(dbVenue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 423, Short.MAX_VALUE)))
+                        .addGap(0, 443, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
