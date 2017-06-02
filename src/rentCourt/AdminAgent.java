@@ -24,7 +24,7 @@ import java.util.zip.GZIPOutputStream;
 import org.apache.commons.codec.binary.Base64;
 import java.util.ArrayList;
 
-public class salesmanAgent extends Agent{
+public class AdminAgent extends Agent{
     
     static final Base64 base64 = new Base64();
     private ArrayList<Court> rooms = new ArrayList<>();
@@ -95,7 +95,7 @@ public class salesmanAgent extends Agent{
                          catch (Exception ex){
                          }
                          
-                         SearchForRooms(room.getType(), room.getPlace(), msg);
+                         SearchForRooms(room.getCourtType(), msg);
                      }
                      
                      else if(msg.getPerformative()==ACLMessage.INFORM){
@@ -166,15 +166,14 @@ public class salesmanAgent extends Agent{
   	}
     }
     
-    public void SearchForRooms(String type, String place, ACLMessage msg){
+    public void SearchForRooms(String type, ACLMessage msg){
         try {
             rooms.clear();
             // Build the description used as template for the search
             DFAgentDescription template = new DFAgentDescription();
             ServiceDescription templateSd = new ServiceDescription();
             templateSd.setType("Renting");
-            templateSd.addProperties(new Property("roomtype", type));
-            templateSd.addProperties(new Property("place", place));
+            templateSd.addProperties(new Property("courttype", type));
             template.addServices(templateSd);
   		
             SearchConstraints sc = new SearchConstraints();
@@ -193,12 +192,9 @@ public class salesmanAgent extends Agent{
                             temp.setProvider(dfd.getName());
                             while(properties.hasNext()){
                                  Property p = (Property)properties.next();
-                                 if(p.getName().equals("roomtype"))
-                                     temp.setType((String)p.getValue());
-                                 else if(p.getName().equals("place"))
-                                     temp.setPlace((String)p.getValue());
-                                 else if(p.getName().equals("price"))
-                                     temp.setPrice(Double.parseDouble((String)p.getValue()));
+                                 if(p.getName().equals("courttype"))
+                                     temp.setCourtType((String)p.getValue());
+                      
                             }
                             rooms.add(temp);
   			}

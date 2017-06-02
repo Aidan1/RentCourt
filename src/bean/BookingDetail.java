@@ -15,6 +15,7 @@ public class BookingDetail implements Serializable
     private AID provider;
     private String reason;
     private String matricNo;
+    private AID renter;
 
     public String getMatricNo() 
     {
@@ -71,4 +72,15 @@ public class BookingDetail implements Serializable
     {
         this.reason = reason;
     }  
+    
+    public AID getRenter() {
+        return renter;
+    }
+
+    /**
+     * @param renter the renter to set
+     */
+    public void setRenter(AID renter) {
+        this.renter = renter;
+    }
 }
