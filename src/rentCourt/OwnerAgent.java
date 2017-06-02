@@ -22,7 +22,7 @@ import java.util.zip.GZIPOutputStream;
 import org.apache.commons.codec.binary.Base64;
 
 public class OwnerAgent extends Agent {
-    private Court room = new Court();
+    private Court court = new Court();
     static final Base64 base64 = new Base64();
     
     public String serializeObjectToString(Object object) throws IOException {
@@ -74,19 +74,14 @@ public class OwnerAgent extends Agent {
         
         //set room type
 	String type = (String) args[0];
-        room.setType(type);
+        court.setType(type);
 
-	//set room place 
-	String place = (String) args[1];
-	room.setPlace(place);
 
-        double price = Double.parseDouble((String)args[2]);
-        room.setPrice(price);
 
         int availability = Integer.parseInt((String)args[3]);
-        room.setAvailable(availability);
+        court.setAvailable(availability);
         
-        String serviceName = "Rent-Room";
+        String serviceName = "Rent-Court";
         
   	try {
             DFAgentDescription dfd = new DFAgentDescription();
@@ -94,9 +89,7 @@ public class OwnerAgent extends Agent {
             ServiceDescription sd = new ServiceDescription();
             sd.setName(serviceName);
             sd.setType("Renting");
-            sd.addProperties(new Property("roomtype", room.getType()));
-            sd.addProperties(new Property("place", room.getPlace()));
-            sd.addProperties(new Property("price", room.getPrice()));
+            sd.addProperties(new Property("courttype", court.getType()));
             dfd.addServices(sd);
   		
             DFService.register(this, dfd);
@@ -123,21 +116,19 @@ public class OwnerAgent extends Agent {
                     String rentType = rent.getType();
 		    String rentPlace = rent.getPlace(); 
                     
-	 	    String roomType = room.getType();
-		    String roomPlace = room.getPlace();
+	 	    String roomType = court.getType();
                     
-                    System.out.println("Room Type : " + roomType + " Room Place : " + roomPlace);
                     System.out.println("Rent Type : " + rentType + " Rent Place : " + rentPlace);
                     
                     if (rentType.equals(roomType)) {
-                        if (rentPlace.equals(roomPlace)) {
-			    if (room.getAvailable() > 0) {                              
-                                room.setAvailable(room.getAvailable()-1);
+                        if (rentPlace.equals("Kedah")) {
+			    if (court.getAvailable() > 0) {                              
+                                court.setAvailable(court.getAvailable()-1);
                                 rent.setApproval(true);                          
                             }
                             else{
                                 rent.setApproval(false);
-                                rent.setReason("No more available room.");
+                                rent.setReason("No more available court.");
 
                                  // Deregister from the yellow pages
                                 try {
