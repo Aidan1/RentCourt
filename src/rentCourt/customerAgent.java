@@ -2,7 +2,7 @@
 package rentCourt;
 
 import bean.Court;
-import bean.RentDetail;
+import bean.BookingDetail;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
@@ -30,7 +30,7 @@ public class customerAgent extends Agent{
     private customerAgentGUI custAgentGUI;
     private ArrayList<Court> rooms = new ArrayList<>();
     private ArrayList<AID> salesman = new ArrayList<>();
-    private RentDetail rentdetail;
+    private BookingDetail rentdetail;
     
     public String serializeObjectToString(Object object) throws IOException {
         String s = null;
@@ -116,9 +116,9 @@ public class customerAgent extends Agent{
                         
                         else if(msg.getPerformative()==ACLMessage.AGREE){
                             String msgContent = msg.getContent();
-                            RentDetail rentdetail = new RentDetail();
+                            BookingDetail rentdetail = new BookingDetail();
                             try{
-                                rentdetail = (RentDetail)deserializeObjectFromString(msgContent);
+                                rentdetail = (BookingDetail)deserializeObjectFromString(msgContent);
                             }
                             catch(Exception ex){}
                             
@@ -132,9 +132,9 @@ public class customerAgent extends Agent{
                         
                         else if(msg.getPerformative()==ACLMessage.REFUSE){
                             String msgContent = msg.getContent();
-                            RentDetail rentdetail = new RentDetail();
+                            BookingDetail rentdetail = new BookingDetail();
                             try{
-                                rentdetail = (RentDetail)deserializeObjectFromString(msgContent);
+                                rentdetail = (BookingDetail)deserializeObjectFromString(msgContent);
                             }
                             catch(Exception ex){}
                             
@@ -209,7 +209,7 @@ public class customerAgent extends Agent{
     
     public void InitializeBookingRequest(int selection){
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        rentdetail = new RentDetail();
+        rentdetail = new BookingDetail();
         
         custAgentGUI.AppendBookingLog("Sending booking request to the salesman.\n");
         custAgentGUI.AppendBookingLog("Please wait.");

@@ -2,7 +2,7 @@
 package rentCourt;
 
 import bean.Court;
-import bean.RentDetail;
+import bean.BookingDetail;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
@@ -101,13 +101,13 @@ public class OwnerAgent extends Agent {
         addBehaviour(new CyclicBehaviour(this) {
             public void action() { 
                 ACLMessage msg = receive();
-                RentDetail rent = new RentDetail();
+                BookingDetail rent = new BookingDetail();
                 
                 if (msg!= null) {                    
                     String msgContent = msg.getContent();
                     try
                     {
-                        rent = (RentDetail)deserializeObjectFromString(msgContent);  
+                        rent = (BookingDetail)deserializeObjectFromString(msgContent);  
                     }
                     catch (Exception ex)
                     {            

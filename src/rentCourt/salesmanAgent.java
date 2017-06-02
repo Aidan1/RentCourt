@@ -2,7 +2,7 @@
 package rentCourt;
 
 import bean.Court;
-import bean.RentDetail;
+import bean.BookingDetail;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
@@ -99,11 +99,11 @@ public class salesmanAgent extends Agent{
                      }
                      
                      else if(msg.getPerformative()==ACLMessage.INFORM){
-                         RentDetail rentdetail = new RentDetail();
+                         BookingDetail rentdetail = new BookingDetail();
                          
                          String msgContent = msg.getContent();
                          try{
-                             rentdetail = (RentDetail)deserializeObjectFromString(msgContent);
+                             rentdetail = (BookingDetail)deserializeObjectFromString(msgContent);
                          }
                          catch(Exception ex){
                          }
@@ -112,11 +112,11 @@ public class salesmanAgent extends Agent{
                      }
                      
                      else if(msg.getPerformative()==ACLMessage.AGREE){
-                         RentDetail rentdetail = new RentDetail();
+                         BookingDetail rentdetail = new BookingDetail();
                          String msgContent = msg.getContent();
                          
                          try{
-                             rentdetail = (RentDetail)deserializeObjectFromString(msgContent);
+                             rentdetail = (BookingDetail)deserializeObjectFromString(msgContent);
                          }
                          catch (Exception ex){}
                          
@@ -127,11 +127,11 @@ public class salesmanAgent extends Agent{
                      }
                      
                      else if(msg.getPerformative()==ACLMessage.REFUSE){
-                         RentDetail rentdetail = new RentDetail();
+                         BookingDetail rentdetail = new BookingDetail();
                          String msgContent = msg.getContent();
                          
                          try{
-                             rentdetail = (RentDetail)deserializeObjectFromString(msgContent);
+                             rentdetail = (BookingDetail)deserializeObjectFromString(msgContent);
                          }
                          catch (Exception ex){}
                          
@@ -230,7 +230,7 @@ public class salesmanAgent extends Agent{
   	}
     }
     
-    public void BookRoom(RentDetail rd){
+    public void BookRoom(BookingDetail rd){
         ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
         
         String strObj = "";

@@ -8,43 +8,29 @@ package bean;
 import java.io.Serializable;
 import jade.core.AID;
 
-public class Court implements Serializable{
-    
-    private String type;
-    private String place;
-    private double price;
-    private int available;
+public class Court implements Serializable
+{
+    private String courtType;
+    private boolean available;
     private AID provider;
+
+    public String getCourtType() 
+    {
+        return courtType;
+    }
+
+    public void setCourtType(String courtType) 
+    {
+        this.courtType = courtType;
+    }
     
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getAvailable() {
+    public boolean getAvailable() 
+    {
         return available;
     }
 
-    public void setAvailable(int available) {
+    public void setAvailable(boolean available) 
+    {
         this.available = available;
     }
 
@@ -52,8 +38,8 @@ public class Court implements Serializable{
         return provider;
     }
 
-    public void setProvider(AID provider) {
+    public void setProvider(AID provider) 
+    {
         this.provider = provider;
     }
-
 }
