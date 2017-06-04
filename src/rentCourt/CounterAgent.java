@@ -78,7 +78,7 @@ public class CounterAgent extends Agent{
     } 
     
     protected void setup(){
-        counterAgentGUI = new CounterAgentGUI(this);
+        counterAgentGUI = new CounterAgentGUI (this);
         counterAgentGUI.ShowGUI();
         
         addBehaviour(new CyclicBehaviour(){
