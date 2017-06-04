@@ -7,11 +7,11 @@ package rentCourt;
 
 public class CounterAgentGUI extends javax.swing.JFrame {
 
-    private CounterAgent counterAgent;
+    private CounterSenderAgent counterAgent;
     private String type;
     private int number;
     
-    public CounterAgentGUI(CounterAgent agent) {
+    public CounterAgentGUI(CounterSenderAgent agent) {
         super(agent.getLocalName());
         counterAgent = agent;
         initComponents();

@@ -13,13 +13,13 @@ public class BookingDetail implements Serializable
     private String courtType;
     private int courtNumber;
     private String matricNo;
-    private int timeSlot;
+    private String timeSlot;
 
-    public int getTimeSlot() {
+    public String getTimeSlot() {
         return timeSlot;
     }
 
-    public void setTimeSlot(int timeSlot) {
+    public void setTimeSlot(String timeSlot) {
         this.timeSlot = timeSlot;
     }
 

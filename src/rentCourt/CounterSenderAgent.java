@@ -137,7 +137,7 @@ public class CounterSenderAgent extends Agent{
         }
     }
     
-    public void searchCourt(int timeSlot, String courtType) {
+    public void searchCourt(String timeSlot, String courtType) {
         SearchRequest request = new SearchRequest();
         request.setTimeSlot(timeSlot);
         request.setCourtType(courtType);
@@ -168,7 +168,7 @@ public class CounterSenderAgent extends Agent{
         }
     }
     
-    public void newBooking(int timeSlot, String courtType, int courtNumber, String matricNo) {
+    public void newBooking(String timeSlot, String courtType, int courtNumber, String matricNo) {
         BookingDetail b = new BookingDetail();
         b.setCourtNumber(courtNumber);
         b.setCourtType(courtType);

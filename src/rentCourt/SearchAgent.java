@@ -109,20 +109,22 @@ public class SearchAgent extends Agent {
                         }
                         if(bookings != null && courts != null && filter != null) {
                             List<BookingDetail> filteredBooking = new ArrayList();
-                            List<Court> result = new ArrayList();
+                            List<Court> noAvailable = new ArrayList();
                             
                             for(BookingDetail b: bookings) {
-                                if(b.getTimeSlot() == filter.getTimeSlot()) {
+                                if(b.getTimeSlot().equals(filter.getTimeSlot())) {
                                     filteredBooking.add(b);
                                 }
                             }
                             for(Court c: courts) {
                                 for(BookingDetail b: filteredBooking) {
                                     if(b.getCourtType().equals(c.getCourtType()) && b.getCourtNumber() == c.getCourtNumber()) {
-                                        result.add(c);
+                                        noAvailable.add(c);
                                     }
                                 }
                             }
+                            List<Court> result = new ArrayList(courts);
+                            result.removeAll(noAvailable);
                             try {
                                 ACLMessage searchReply = new ACLMessage(ACLMessage.INFORM);
                                 searchReply.setContent(Serializer.serializeObjectToString(result));

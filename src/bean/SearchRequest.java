@@ -12,15 +12,15 @@ import jade.core.AID;
  * @author kingw
  */
 public class SearchRequest {
-    private int timeSlot;
+    private String timeSlot;
     private AID requester;
     private String courtType;
 
-    public int getTimeSlot() {
+    public String getTimeSlot() {
         return timeSlot;
     }
 
-    public void setTimeSlot(int timeSlot) {
+    public void setTimeSlot(String timeSlot) {
         this.timeSlot = timeSlot;
     }
 
