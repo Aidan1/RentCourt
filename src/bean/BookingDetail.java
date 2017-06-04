@@ -12,10 +12,31 @@ public class BookingDetail implements Serializable
 {
     private boolean approval;
     private String courtType;
+    private int courtNumber;
     private AID provider;
     private String reason;
     private String matricNo;
     private AID renter;
+    
+    private int timeSlot;
+
+    public int getTimeSlot() {
+        return timeSlot;
+    }
+
+    public void setTimeSlot(int timeSlot) {
+        this.timeSlot = timeSlot;
+    }
+
+    public int getCourtNumber() {
+        return courtNumber;
+    }
+
+    public void setCourtNumber(int courtNumber) {
+        this.courtNumber = courtNumber;
+    }
+    
+    
 
     public String getMatricNo() 
     {

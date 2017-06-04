@@ -5,15 +5,15 @@
  */
 package rentCourt;
 
-public class CounterAgentGUI extends javax.swing.JFrame {
+public class CounterGUI extends javax.swing.JFrame {
 
-    private CounterAgent counterAgent;
+    private CounterSenderAgent counterSenderAgent;
     private String type;
     private int number;
     
-    public CounterAgentGUI(CounterAgent agent) {
+    public CounterGUI(CounterSenderAgent agent) {
         super(agent.getLocalName());
-        counterAgent = agent;
+        counterSenderAgent = agent;
         initComponents();
     }
 
@@ -30,7 +30,7 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        dbCourt = new javax.swing.JComboBox<String>();
+        dbCourt = new javax.swing.JComboBox<>();
         btnBook = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -46,7 +46,7 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtBookingLog = new javax.swing.JTextArea();
-        dbCourt1 = new javax.swing.JComboBox<String>();
+        dbCourt1 = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
 
@@ -58,7 +58,7 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         jLabel2.setText("Matric No.");
         jLabel2.setToolTipText("");
 
-        dbCourt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Badminton", "Squash", "Ping pong", " ", " ", " " }));
+        dbCourt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Badminton", "Squash", "Ping pong", " ", " ", " " }));
 
         btnBook.setText("Book");
         btnBook.addActionListener(new java.awt.event.ActionListener() {
@@ -153,7 +153,12 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         txtBookingLog.setRows(5);
         jScrollPane3.setViewportView(txtBookingLog);
 
-        dbCourt1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Badminton", "Squash", "Ping pong", " ", " ", " " }));
+        dbCourt1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Badminton", "Squash", "Ping pong", " ", " ", " " }));
+        dbCourt1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dbCourt1ActionPerformed(evt);
+            }
+        });
 
         jLabel7.setText("Court");
         jLabel7.setToolTipText("");
@@ -240,14 +245,14 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         txtLog.append("Please wait. \n");
         txtLog.append("......... \n");
         
-        counterAgent.InitializeRoomRequest();
+        counterSenderAgent.InitializeCourtRequest();
     }//GEN-LAST:event_btnBookActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
 
         try{
             number = Integer.parseInt(txtAddNumber.getText());
-            counterAgent.InitializeBookingRequest(number);
+            counterSenderAgent.InitializeBookingRequest(number);
         }
         catch(Exception ex){
             AppendLog("Please insert integer only.");
@@ -257,6 +262,10 @@ public class CounterAgentGUI extends javax.swing.JFrame {
     private void txtMatricActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMatricActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMatricActionPerformed
+
+    private void dbCourt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dbCourt1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dbCourt1ActionPerformed
 
     public void ShowGUI() {
         /* Set the Nimbus look and feel */
@@ -272,14 +281,16 @@ public class CounterAgentGUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CounterAgentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CounterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CounterAgentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CounterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CounterAgentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CounterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CounterAgentGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CounterGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

@@ -5,12 +5,14 @@ import Util.Serializer;
 import Util.ServiceInitializer;
 import bean.Court;
 import bean.BookingDetail;
+import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.domain.DFService;
 import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.Property;
+import jade.domain.FIPAAgentManagement.SearchConstraints;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.lang.acl.ACLMessage;
 
@@ -19,42 +21,45 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
+import org.apache.commons.codec.binary.Base64;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.GZIPOutputStream;
-import org.apache.commons.codec.binary.Base64;
 
-public class BookingAgent extends Agent {
+public class CourtAgent extends Agent{
     
-    private List<BookingDetail> bookings = new ArrayList<>();
+    private List<Court> courts = new ArrayList<>();
     
-    protected void setup() {
-        ServiceInitializer.initialize(this, "BookingAgent", "DataType");
-        addBehaviour(new CyclicBehaviour(this) {
+    protected void setup(){
+        ServiceInitializer.initialize(this, "CourtAgent", "DataType");
+        addBehaviour(new CyclicBehaviour(){
             @Override
-            public void action() { 
+            public void action() {
                 ACLMessage msg = receive();
-                if (msg!= null) {                    
-                    if(msg.getPerformative()==ACLMessage.REQUEST) {
-                        BookingDetail booking;
+                if(msg!=null)
+                {
+                    if(msg.getPerformative()==ACLMessage.REQUEST)
+                    {
+                        Court court;
                         try
                         {
-                            booking = (BookingDetail)Serializer.deserializeObjectFromString(msg.getContent()); 
-                            bookings.add(booking);
+                            court = (Court)Serializer.deserializeObjectFromString(msg.getContent()); 
+                            courts.add(court);
                         }
                         catch (Exception ex){
                         }
                         ACLMessage reply = new ACLMessage(ACLMessage.CONFIRM);
-                        reply.setContent("Booking Added Successfully");
+                        reply.setContent("Court Added Successfully");
                         reply.addReceiver(msg.getSender());
                         send(reply);
-                    } else if(msg.getPerformative()==ACLMessage.INFORM) {
+                     }
+                     else if(msg.getPerformative()==ACLMessage.INFORM){
                         String msgContent;
                         try {
-                           msgContent = Serializer.serializeObjectToString(bookings);
+                           msgContent = Serializer.serializeObjectToString(courts);
                            ACLMessage reply = new ACLMessage(ACLMessage.INFORM);
                            reply.setContent(msgContent);
                            reply.addReceiver(msg.getSender());
@@ -62,10 +67,10 @@ public class BookingAgent extends Agent {
                         } catch (IOException ex) {
                             Logger.getLogger(CourtAgent.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    }
-                }
-                block();
+                     }
+                 }
+                 block();
             }
         });
-    }    
+    }
 }

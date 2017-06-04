@@ -11,7 +11,7 @@ import jade.core.AID;
 public class Court implements Serializable
 {
     private String courtType;
-    private int available;
+    private int courtNumber;
     private AID provider;
 
     public String getCourtType() 
@@ -24,12 +24,12 @@ public class Court implements Serializable
         this.courtType = courtType;
     }
     
-    public int getAvailable() {
-        return available;
+    public int getCourtNumber() {
+        return courtNumber;
     }
 
-    public void setAvailable(int available) {
-        this.available = available;
+    public void setCourtNumber(int courtNumber) {
+        this.courtNumber = courtNumber;
     }
 
     public AID getProvider() {
