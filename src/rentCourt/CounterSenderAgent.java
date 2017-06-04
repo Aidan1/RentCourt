@@ -34,7 +34,8 @@ public class CounterSenderAgent extends Agent{
     
     private CounterAgentGUI counterGUI;
     private AID searchAgent, courtAgent, bookingAgent;
-    private Map<AID, String> agentMap;
+    
+    private List<Court> searchResult;
     
     protected void setup(){
         counterGUI = new CounterAgentGUI (this);
@@ -52,7 +53,7 @@ public class CounterSenderAgent extends Agent{
                             List<BookingDetail> bookings;
                             try {
                                 bookings = (List<BookingDetail>)Serializer.deserializeObjectFromString(msg.getContent()); 
-                                counterGUI.AppendLog("Received " + bookings.size() + " booking(s).");
+                                counterGUI.AppendLog("Updated " + bookings.size() + " booking(s).");
                                 counterGUI.listBooking(bookings);
                             }
                             catch (Exception ex){
@@ -66,21 +67,22 @@ public class CounterSenderAgent extends Agent{
                             List<Court> courts;
                             try {
                                 courts = (List<Court>)Serializer.deserializeObjectFromString(msg.getContent()); 
-                                counterGUI.AppendLog("Received " + courts.size() + " court(s).");
+                                counterGUI.AppendLog("Updated " + courts.size() + " court(s).");
                                 counterGUI.listCourt(courts);
                             }
                             catch (Exception ex){
                             }
                         } else if(msg.getPerformative()==ACLMessage.CONFIRM) {
-                            counterGUI.AppendLog(msg.getContent());
+                            counterGUI.AppendLog("*Success* " + msg.getContent());
+                        } else if(msg.getPerformative()==ACLMessage.FAILURE) {
+                            counterGUI.AppendLog("*Fail* " + msg.getContent());
                         }
                     } else if (msg.getSender().equals(searchAgent)) {
                         if(msg.getPerformative()==ACLMessage.INFORM){
-                            List<Court> courts;
                             try {
-                                courts = (List<Court>)Serializer.deserializeObjectFromString(msg.getContent()); 
-                                counterGUI.AppendLog("Found " + courts.size() + " available court(s).");
-                                counterGUI.listSearch(courts);
+                                searchResult = (List<Court>)Serializer.deserializeObjectFromString(msg.getContent()); 
+                                counterGUI.AppendLog("Found " + searchResult.size() + " available court(s).");
+                                counterGUI.listSearch(searchResult);
                             }
                             catch (Exception ex){
                             }
@@ -187,6 +189,16 @@ public class CounterSenderAgent extends Agent{
     }
     
     public void newBooking(String timeSlot, String courtType, int courtNumber, String matricNo) {
+        boolean found = false;
+        for(Court c: searchResult) {
+            if(courtNumber == c.getCourtNumber()) {
+                found = true;
+            }
+        }
+        if(!found) {
+            counterGUI.AppendLog("*Error* Please key in the correct court number from the list");
+            return;
+        }
         BookingDetail b = new BookingDetail();
         b.setCourtNumber(courtNumber);
         b.setCourtType(courtType);

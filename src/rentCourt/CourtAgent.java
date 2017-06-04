@@ -44,17 +44,30 @@ public class CourtAgent extends Agent{
                     if(msg.getPerformative()==ACLMessage.REQUEST)
                     {
                         Court court;
+                        boolean duplicate = false;
                         try
                         {
-                            court = (Court)Serializer.deserializeObjectFromString(msg.getContent()); 
-                            courts.add(court);
+                            court = (Court)Serializer.deserializeObjectFromString(msg.getContent());
+                            for(Court c: courts) {
+                                if(c.getCourtType().equals(court.getCourtType()) && c.getCourtNumber() == court.getCourtNumber()) {
+                                    duplicate = true;
+                                }
+                            }
+                            if(duplicate) {
+                                ACLMessage reply = new ACLMessage(ACLMessage.FAILURE);
+                                reply.setContent("Fail to add court, duplicate entry found!");
+                                reply.addReceiver(msg.getSender());
+                                send(reply);
+                            } else {
+                                ACLMessage reply = new ACLMessage(ACLMessage.CONFIRM);
+                                reply.setContent("Court Added Successfully");
+                                reply.addReceiver(msg.getSender());
+                                send(reply);
+                                courts.add(court);
+                            }
                         }
                         catch (Exception ex){
                         }
-                        ACLMessage reply = new ACLMessage(ACLMessage.CONFIRM);
-                        reply.setContent("Court Added Successfully");
-                        reply.addReceiver(msg.getSender());
-                        send(reply);
                      }
                      else if(msg.getPerformative()==ACLMessage.INFORM){
                         String msgContent;

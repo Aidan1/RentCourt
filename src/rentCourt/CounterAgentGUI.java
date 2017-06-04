@@ -415,11 +415,12 @@ public class CounterAgentGUI extends javax.swing.JFrame {
     
     public void AppendLog(String log) {
         txtLog.append(log + "\n");
+        txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
 
     public void listBooking(List<BookingDetail> bookings) {
         txtCurrentBooking.setText("");
-        txtCurrentBooking.append("Court Type\tTime Slot\tMatric");
+        txtCurrentBooking.append("Court\tTime Slot\tMatric");
         txtCurrentBooking.append("\n");
         for(BookingDetail b: bookings) {
             String str = b.getCourtType()+"-"+b.getCourtNumber()+"\t"+b.getTimeSlot()+"\t"+b.getMatricNo();
