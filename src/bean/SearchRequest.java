@@ -14,6 +14,7 @@ import jade.core.AID;
 public class SearchRequest {
     private int timeSlot;
     private AID requester;
+    private String courtType;
 
     public int getTimeSlot() {
         return timeSlot;
@@ -30,6 +31,12 @@ public class SearchRequest {
     public void setRequester(AID requester) {
         this.requester = requester;
     }
-    
-    
+
+    public String getCourtType() {
+        return courtType;
+    }
+
+    public void setCourtType(String courtType) {
+        this.courtType = courtType;
+    }
 }

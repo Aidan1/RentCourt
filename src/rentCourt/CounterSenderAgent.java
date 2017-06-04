@@ -1,8 +1,10 @@
 
 package rentCourt;
 
+import Util.Serializer;
 import bean.Court;
 import bean.BookingDetail;
+import bean.SearchRequest;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
@@ -23,6 +25,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 import org.apache.commons.codec.binary.Base64;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,6 +33,7 @@ import java.util.logging.Logger;
 public class CounterSenderAgent extends Agent{
     
     private CounterGUI counterGUI;
+    private AID searchAgent, courtAgent, bookingAgent;
     private Map<AID, String> agentMap;
     
     protected void setup(){
@@ -43,27 +47,43 @@ public class CounterSenderAgent extends Agent{
             public void action() {
                 ACLMessage msg = receive();
                 if(msg!=null){
-                    String senderName = agentMap.get(msg.getSender());
-                    switch(senderName) {
-                        case "BookingAgent":
-                            if(msg.getPerformative()==ACLMessage.INFORM){
-                                
-                            } else if(msg.getPerformative()==ACLMessage.CONFIRM) {
-                                
+                    if(msg.getSender() == bookingAgent) {
+                        if(msg.getPerformative()==ACLMessage.INFORM){
+                            List<BookingDetail> bookings;
+                            try {
+                                bookings = (List<BookingDetail>)Serializer.deserializeObjectFromString(msg.getContent()); 
+                                counterGUI.AppendLog("Received " + bookings.size() + " booking(s).");
+                                counterGUI.listBooking(bookings);
                             }
-                            break;
-                        case "CourtAgent":
-                            if(msg.getPerformative()==ACLMessage.INFORM){
-                                
-                            } else if(msg.getPerformative()==ACLMessage.CONFIRM) {
-                                
+                            catch (Exception ex){
                             }
-                            break;
-                        case "SearchAgent":
-                            if(msg.getPerformative()==ACLMessage.INFORM){
-                                
+                        } else if(msg.getPerformative()==ACLMessage.CONFIRM) {
+                            counterGUI.AppendLog(msg.getContent());
+                        }
+                    } else if (msg.getSender() == courtAgent) {
+                        if(msg.getPerformative()==ACLMessage.INFORM){
+                            List<Court> courts;
+                            try {
+                                courts = (List<Court>)Serializer.deserializeObjectFromString(msg.getContent()); 
+                                counterGUI.AppendLog("Received " + courts.size() + " court(s).");
+                                counterGUI.listCourt(courts);
                             }
-                            break;
+                            catch (Exception ex){
+                            }
+                        } else if(msg.getPerformative()==ACLMessage.CONFIRM) {
+                            counterGUI.AppendLog(msg.getContent());
+                        }
+                    } else if (msg.getSender() == searchAgent) {
+                        if(msg.getPerformative()==ACLMessage.INFORM){
+                            List<Court> courts;
+                            try {
+                                courts = (List<Court>)Serializer.deserializeObjectFromString(msg.getContent()); 
+                                counterGUI.AppendLog("Found " + courts.size() + " available court(s).");
+                                counterGUI.listSearch(courts);
+                            }
+                            catch (Exception ex){
+                            }
+                        }
                     }
                 }
                 block();
@@ -93,8 +113,16 @@ public class CounterSenderAgent extends Agent{
                     jade.util.leap.Iterator it = dfd.getAllServices();
                     while (it.hasNext()) {
                         ServiceDescription sd = (ServiceDescription) it.next();
-                        agentMap.put(provider, sd.getName());
-                        counterGUI.AppendLog("Connected to " + sd.getName());
+                        if(sd.getName().equals("BookingAgent")) {
+                            bookingAgent = provider;
+                            counterGUI.AppendLog("Connected to " + sd.getName());
+                        } else if(sd.getName().equals("CourtAgent")) {
+                            courtAgent = provider;
+                            counterGUI.AppendLog("Connected to " + sd.getName());
+                        } else if(sd.getName().equals("SearchAgent")) {
+                            searchAgent = provider;
+                            counterGUI.AppendLog("Connected to " + sd.getName());
+                        }
                     }
                 }
             }
@@ -107,5 +135,65 @@ public class CounterSenderAgent extends Agent{
         catch (FIPAException fe) {
             fe.printStackTrace();
         }
+    }
+    
+    public void searchCourt(int timeSlot, String courtType) {
+        SearchRequest request = new SearchRequest();
+        request.setTimeSlot(timeSlot);
+        request.setCourtType(courtType);
+        request.setRequester(this.getAID());
+        
+        try {
+            ACLMessage search = new ACLMessage(ACLMessage.REQUEST);
+            search.setContent(Serializer.serializeObjectToString(request));
+            search.addReceiver(searchAgent);
+            send(search);
+        } catch (IOException ex) {
+            Logger.getLogger(CounterSenderAgent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void newCourt(String courtType, int courtNumber) {
+        Court c = new Court();
+        c.setCourtNumber(courtNumber);
+        c.setCourtType(courtType);
+        
+        try {
+            ACLMessage search = new ACLMessage(ACLMessage.REQUEST);
+            search.setContent(Serializer.serializeObjectToString(c));
+            search.addReceiver(courtAgent);
+            send(search);
+        } catch (IOException ex) {
+            Logger.getLogger(CounterSenderAgent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void newBooking(int timeSlot, String courtType, int courtNumber, String matricNo) {
+        BookingDetail b = new BookingDetail();
+        b.setCourtNumber(courtNumber);
+        b.setCourtType(courtType);
+        b.setMatricNo(matricNo);
+        b.setTimeSlot(timeSlot);
+        
+        try {
+            ACLMessage search = new ACLMessage(ACLMessage.REQUEST);
+            search.setContent(Serializer.serializeObjectToString(b));
+            search.addReceiver(bookingAgent);
+            send(search);
+        } catch (IOException ex) {
+            Logger.getLogger(CounterSenderAgent.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void getCourt() {
+        ACLMessage search = new ACLMessage(ACLMessage.INFORM);
+        search.addReceiver(courtAgent);
+        send(search);
+    }
+    
+    public void getBooking() {
+        ACLMessage search = new ACLMessage(ACLMessage.INFORM);
+        search.addReceiver(bookingAgent);
+        send(search);
     }
 }
