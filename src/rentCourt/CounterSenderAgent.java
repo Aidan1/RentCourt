@@ -175,7 +175,6 @@ public class CounterSenderAgent extends Agent{
         Court c = new Court();
         c.setCourtNumber(courtNumber);
         c.setCourtType(courtType);
-        
         try {
             ACLMessage search = new ACLMessage(ACLMessage.REQUEST);
             search.setContent(Serializer.serializeObjectToString(c));
@@ -184,7 +183,6 @@ public class CounterSenderAgent extends Agent{
         } catch (IOException ex) {
             Logger.getLogger(CounterSenderAgent.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         getCourt();
     }
     
@@ -203,7 +201,6 @@ public class CounterSenderAgent extends Agent{
         } catch (IOException ex) {
             Logger.getLogger(CounterSenderAgent.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         getBooking();
     }
     

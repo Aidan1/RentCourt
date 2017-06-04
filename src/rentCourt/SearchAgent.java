@@ -121,9 +121,12 @@ public class SearchAgent extends Agent {
                                 for(BookingDetail b: filteredBooking) {
                                     if(b.getCourtType().equals(c.getCourtType()) && b.getCourtNumber() == c.getCourtNumber()) {
                                         noAvailable.add(c);
-                                    } else if(c.getCourtType().equals(filter.getCourtType())) {
-                                        noAvailable.add(c);
                                     }
+                                }
+                            }
+                            for(Court c: courts) {
+                                if(!c.getCourtType().equals(filter.getCourtType())) {
+                                    noAvailable.add(c);
                                 }
                             }
                             List<Court> result = new ArrayList(courts);
