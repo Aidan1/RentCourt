@@ -70,15 +70,18 @@ public class BookingAgent extends Agent {
     protected void setup() {
         
         //Type of Room and Place
-        Object[] args = getArguments();
+        //Object[] args = getArguments();
         
         //set room type
-	String type = (String) args[0];
-        court.setCourtType(type);
+	//String type = (String) args[0];
+        //court.setCourtType(type);
+        
+        court.setCourtType("Badminton");
+        court.setAvailable(5);
 
 
 
-        int availability = Integer.parseInt((String)args[3]);
+        //int availability = Integer.parseInt((String)args[3]);
         
         String serviceName = "Rent-Court";
         
@@ -113,15 +116,14 @@ public class BookingAgent extends Agent {
                     }
                     
                     String rentType = rent.getCourtType();
-		    String rentPlace = rent.getCourtType(); 
                     
-	 	    String roomType = court.getCourtType();
+	 	    String courtType = court.getCourtType();
                     
-                    System.out.println("Rent Type : " + rentType + " Rent Place : " + rentPlace);
+                    System.out.println("Rent Type : " + rentType);
                     
-                    if (rentType.equals(roomType)) {
-                        if (rentPlace.equals("Kedah")) {
-			    if (court.getAvailable() > 0) {                              
+                    
+                    if (rentType.equals(courtType)) {
+                        if (court.getAvailable() > 0) {                              
                                 court.setAvailable(court.getAvailable()-1);
                                 rent.setApproval(true);                          
                             }
@@ -137,11 +139,7 @@ public class BookingAgent extends Agent {
                                      fe.printStackTrace();
                                 }     
                             }
-                        }
-                        else {
-                            rent.setApproval(false);
-                            rent.setReason("Wrong booking place.");
-                        }
+          
                     }
                     else{
                         rent.setApproval(false);
