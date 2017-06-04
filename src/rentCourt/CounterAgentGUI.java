@@ -33,7 +33,7 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         dbTime = new javax.swing.JComboBox<String>();
         btnBook = new javax.swing.JButton();
         txtMatric = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        txtSearchResult = new javax.swing.JScrollPane();
         btnSearch = new javax.swing.JButton();
         dbCourt = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
@@ -43,7 +43,7 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        txtAvailableCourt = new javax.swing.JTextArea();
+        txtCurrentBooking = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         txtAddNumber = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
@@ -52,7 +52,7 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        txtAvailableCourt1 = new javax.swing.JTextArea();
+        txtCurrentCourt = new javax.swing.JTextArea();
         btnUpdate = new javax.swing.JButton();
         txtLog = new javax.swing.JScrollPane();
         jLabel9 = new javax.swing.JLabel();
@@ -117,7 +117,7 @@ public class CounterAgentGUI extends javax.swing.JFrame {
                         .addComponent(dbCourt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52)
                         .addComponent(btnSearch))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtSearchResult, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnBook)
@@ -137,31 +137,32 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(103, 103, 103)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(dbCourtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMatric, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addComponent(btnBook)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(dbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(dbCourt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch)
-                    .addComponent(jLabel11))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(dbCourtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtMatric, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBook))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(dbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(dbCourt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSearch)
+                            .addComponent(jLabel11))
+                        .addGap(29, 29, 29)
+                        .addComponent(txtSearchResult, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         dbTime.getAccessibleContext().setAccessibleName("dbPlace");
@@ -173,9 +174,9 @@ public class CounterAgentGUI extends javax.swing.JFrame {
 
         jLabel4.setText("Current Booking");
 
-        txtAvailableCourt.setColumns(20);
-        txtAvailableCourt.setRows(5);
-        jScrollPane2.setViewportView(txtAvailableCourt);
+        txtCurrentBooking.setColumns(20);
+        txtCurrentBooking.setRows(5);
+        jScrollPane2.setViewportView(txtCurrentBooking);
 
         jLabel5.setText("Addition of court: ");
 
@@ -202,9 +203,9 @@ public class CounterAgentGUI extends javax.swing.JFrame {
 
         jLabel10.setText("Current Court");
 
-        txtAvailableCourt1.setColumns(20);
-        txtAvailableCourt1.setRows(5);
-        jScrollPane3.setViewportView(txtAvailableCourt1);
+        txtCurrentCourt.setColumns(20);
+        txtCurrentCourt.setRows(5);
+        jScrollPane3.setViewportView(txtCurrentCourt);
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -405,11 +406,11 @@ public class CounterAgentGUI extends javax.swing.JFrame {
     }
     
     public void AppendAvailableRoom(String log){
-        txtAvailableCourt.append(log);
+        txtCurrentBooking.append(log);
     }
     
     public void ClearAvailableRoom(){
-        txtAvailableCourt.setText("");
+        txtCurrentBooking.setText("");
     }
     
     public void NextStep(){
@@ -439,15 +440,15 @@ public class CounterAgentGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane mainPanel;
     private javax.swing.JTextField txtAddNumber;
-    private javax.swing.JTextArea txtAvailableCourt;
-    private javax.swing.JTextArea txtAvailableCourt1;
+    private javax.swing.JTextArea txtCurrentBooking;
+    private javax.swing.JTextArea txtCurrentCourt;
     private javax.swing.JScrollPane txtLog;
     private javax.swing.JTextField txtMatric;
+    private javax.swing.JScrollPane txtSearchResult;
     // End of variables declaration//GEN-END:variables
 
   
