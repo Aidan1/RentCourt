@@ -38,6 +38,7 @@ public class SearchAgent extends Agent {
     List<BookingDetail> bookings;
     
     SearchRequest filter;
+    AID searchRequester;
     
     protected void setup() {
         
@@ -85,22 +86,22 @@ public class SearchAgent extends Agent {
                         try
                         {
                             filter = (SearchRequest)Serializer.deserializeObjectFromString(msg.getContent()); 
+                            searchRequester = msg.getSender();
                         }
                         catch (Exception ex){
                         }
-                        msg.getContent();
                         ACLMessage getData = new ACLMessage(ACLMessage.INFORM);
                         getData.addReceiver(bookingAgent);
                         getData.addReceiver(courtAgent);
                         send(getData);
                     } else if(msg.getPerformative()==ACLMessage.INFORM) {
-                        if(msg.getSender() == bookingAgent) {
+                        if(msg.getSender().equals(bookingAgent)) {
                             try {
                                 bookings = (List<BookingDetail>)Serializer.deserializeObjectFromString(msg.getContent()); 
                             }
                             catch (Exception ex){
                             }
-                        } else if (msg.getSender() == courtAgent) {
+                        } else if (msg.getSender().equals(courtAgent)) {
                             try {
                                 courts = (List<Court>)Serializer.deserializeObjectFromString(msg.getContent()); 
                             }
@@ -120,6 +121,8 @@ public class SearchAgent extends Agent {
                                 for(BookingDetail b: filteredBooking) {
                                     if(b.getCourtType().equals(c.getCourtType()) && b.getCourtNumber() == c.getCourtNumber()) {
                                         noAvailable.add(c);
+                                    } else if(c.getCourtType().equals(filter.getCourtType())) {
+                                        noAvailable.add(c);
                                     }
                                 }
                             }
@@ -128,7 +131,7 @@ public class SearchAgent extends Agent {
                             try {
                                 ACLMessage searchReply = new ACLMessage(ACLMessage.INFORM);
                                 searchReply.setContent(Serializer.serializeObjectToString(result));
-                                searchReply.addReceiver(filter.getRequester());
+                                searchReply.addReceiver(searchRequester);
                                 send(searchReply);
                             } catch (IOException ex) {
                                 Logger.getLogger(CourtAgent.class.getName()).log(Level.SEVERE, null, ex);

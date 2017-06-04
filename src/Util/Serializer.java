@@ -42,7 +42,10 @@ public class Serializer {
             arrayOutputStream.flush();
             arrayOutputStream.close();
         }
-        catch(Exception ex){}
+        catch(Exception ex){
+            System.out.println("Fail to Serialize Object " + object);
+            System.out.println("Exception: " + ex);
+        }
         
         return s;
     }
@@ -64,3 +67,4 @@ public class Serializer {
         return obj;
     }
 }
+

@@ -6,14 +6,14 @@
 package bean;
 
 import jade.core.AID;
+import java.io.Serializable;
 
 /**
  *
  * @author kingw
  */
-public class SearchRequest {
+public class SearchRequest implements Serializable {
     private String timeSlot;
-    private AID requester;
     private String courtType;
 
     public String getTimeSlot() {
@@ -22,14 +22,6 @@ public class SearchRequest {
 
     public void setTimeSlot(String timeSlot) {
         this.timeSlot = timeSlot;
-    }
-
-    public AID getRequester() {
-        return requester;
-    }
-
-    public void setRequester(AID requester) {
-        this.requester = requester;
     }
 
     public String getCourtType() {
