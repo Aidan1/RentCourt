@@ -6,33 +6,34 @@
 package bean;
 
 import java.io.Serializable;
-import jade.core.AID;
 
 public class BookingDetail implements Serializable 
 {
-    private String courtType;
     private int courtNumber;
     private String matricNo;
     private String timeSlot;
+    private String courtType;
 
-    public String getTimeSlot() {
+    public String getTimeSlot() 
+    {
         return timeSlot;
     }
 
-    public void setTimeSlot(String timeSlot) {
+    public void setTimeSlot(String timeSlot) 
+    {
         this.timeSlot = timeSlot;
     }
 
-    public int getCourtNumber() {
+    public int getCourtNumber() 
+    {
         return courtNumber;
     }
 
-    public void setCourtNumber(int courtNumber) {
+    public void setCourtNumber(int courtNumber) 
+    {
         this.courtNumber = courtNumber;
     }
     
-    
-
     public String getMatricNo() 
     {
         return matricNo;

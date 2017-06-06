@@ -5,30 +5,33 @@
  */
 package bean;
 
-import jade.core.AID;
 import java.io.Serializable;
-
 /**
  *
  * @author kingw
  */
-public class SearchRequest implements Serializable {
+public class SearchRequest implements Serializable 
+{
     private String timeSlot;
     private String courtType;
 
-    public String getTimeSlot() {
+    public String getTimeSlot() 
+    {
         return timeSlot;
     }
 
-    public void setTimeSlot(String timeSlot) {
+    public void setTimeSlot(String timeSlot) 
+    {
         this.timeSlot = timeSlot;
     }
 
-    public String getCourtType() {
+    public String getCourtType() 
+    {
         return courtType;
     }
 
-    public void setCourtType(String courtType) {
+    public void setCourtType(String courtType) 
+    {
         this.courtType = courtType;
     }
 }

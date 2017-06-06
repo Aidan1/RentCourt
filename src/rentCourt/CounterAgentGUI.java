@@ -9,12 +9,13 @@ import bean.BookingDetail;
 import bean.Court;
 import java.util.List;
 
-public class CounterAgentGUI extends javax.swing.JFrame {
-
-    private CounterSenderAgent counterAgent;
+public class CounterAgentGUI extends javax.swing.JFrame 
+{
     private int number;
+    private CounterSenderAgent counterAgent;
     
-    public CounterAgentGUI(CounterSenderAgent agent) {
+    public CounterAgentGUI(CounterSenderAgent agent) 
+    {
         super(agent.getLocalName());
         counterAgent = agent;
         initComponents();
@@ -33,11 +34,11 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        dbTime = new javax.swing.JComboBox<>();
+        dbTime = new javax.swing.JComboBox<String>();
         btnBook = new javax.swing.JButton();
         txtMatric = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
-        dbCourt = new javax.swing.JComboBox<>();
+        dbCourt = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -51,7 +52,7 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txtAddNumber = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
-        dbCourt1 = new javax.swing.JComboBox<>();
+        dbCourt1 = new javax.swing.JComboBox<String>();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -70,7 +71,7 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         jLabel2.setText("Matric No.");
         jLabel2.setToolTipText("");
 
-        dbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0800-0900", "0900-1000", "1000-1100", "1100-1200", "1200-1300", "1300-1400", "1400-1500", "1500-1600", "1600-1700", " ", " " }));
+        dbTime.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0800-0900", "0900-1000", "1000-1100", "1100-1200", "1200-1300", "1300-1400", "1400-1500", "1500-1600", "1600-1700", " ", " " }));
 
         btnBook.setText("Book");
         btnBook.addActionListener(new java.awt.event.ActionListener() {
@@ -92,7 +93,7 @@ public class CounterAgentGUI extends javax.swing.JFrame {
             }
         });
 
-        dbCourt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Badminton", "Squash", "Ping pong", " ", " ", " " }));
+        dbCourt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Badminton", "Squash", "Ping pong", " ", " ", " " }));
 
         jLabel3.setText("Court");
         jLabel3.setToolTipText("");
@@ -206,7 +207,7 @@ public class CounterAgentGUI extends javax.swing.JFrame {
             }
         });
 
-        dbCourt1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Badminton", "Squash", "Ping pong", " ", " ", " " }));
+        dbCourt1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Badminton", "Squash", "Ping pong" }));
 
         jLabel7.setText("Court");
         jLabel7.setToolTipText("");
@@ -239,9 +240,9 @@ public class CounterAgentGUI extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnUpdate)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdate))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,14 +288,14 @@ public class CounterAgentGUI extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(dbCourt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
+                        .addGap(1, 1, 1)
                         .addComponent(btnUpdate)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(txtAddNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         mainPanel.addTab("Admin", jPanel2);
@@ -413,42 +414,52 @@ public class CounterAgentGUI extends javax.swing.JFrame {
         btnAdd.disable();
     }
     
-    public void AppendLog(String log) {
+    public void AppendLog(String log) 
+    {
         txtLog.append(log + "\n");
         txtLog.setCaretPosition(txtLog.getDocument().getLength());
     }
 
-    public void listBooking(List<BookingDetail> bookings) {
+    public void listBooking(List<BookingDetail> bookings) 
+    {
         txtCurrentBooking.setText("");
         txtCurrentBooking.append("Court\tTime Slot\tMatric");
         txtCurrentBooking.append("\n");
-        for(BookingDetail b: bookings) {
-            String str = b.getCourtType()+"-"+b.getCourtNumber()+"\t"+b.getTimeSlot()+"\t"+b.getMatricNo();
+        
+        bookings.stream().map((b) -> b.getCourtType() + "-" + b.getCourtNumber() + "\t" + b.getTimeSlot() + "\t" + b.getMatricNo()).map((str) -> {
             txtCurrentBooking.append(str);
+            return str;
+        }).forEach((_item) -> {
             txtCurrentBooking.append("\n");
-        }
+        });
     }
     
-    public void listCourt(List<Court> courts) {
+    public void listCourt(List<Court> courts) 
+    {
         txtCurrentCourt.setText("");
         txtCurrentCourt.append("Court Type\tCourt Number");
         txtCurrentCourt.append("\n");
-        for(Court c: courts) {
-            String str = c.getCourtType()+"\t"+c.getCourtNumber();
+        
+        courts.stream().map((c) -> c.getCourtType() + "\t" + c.getCourtNumber()).map((str) -> {
             txtCurrentCourt.append(str);
+            return str;
+        }).forEach((_item) -> {
             txtCurrentCourt.append("\n");
-        }
+        });
     }
     
-    public void listSearch(List<Court> courts) {
+    public void listSearch(List<Court> courts) 
+    {
         txtSearchResult.setText("");
         txtSearchResult.append("Court Type\tCourt Number");
         txtSearchResult.append("\n");
-        for(Court c: courts) {
-            String str = c.getCourtType()+"\t"+c.getCourtNumber();
+        
+        courts.stream().map((c) -> c.getCourtType() + "\t" + c.getCourtNumber()).map((str) -> {
             txtSearchResult.append(str);
+            return str;
+        }).forEach((_item) -> {
             txtSearchResult.append("\n");
-        }
+        });
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -487,34 +498,41 @@ public class CounterAgentGUI extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
   
-    public String getCourtType() {
+    public String getCourtType() 
+    {
         return dbCourt.getSelectedItem().toString();
     }
     
-    public String getNewCourtType() {
+    public String getNewCourtType() 
+    {
         return dbCourt1.getSelectedItem().toString();
     }
     
-    public String getMatricNo() {
+    public String getMatricNo() 
+    {
         return txtMatric.getText();
     }
     
-    public String getTimeSlot() {
+    public String getTimeSlot() 
+    {
         return dbTime.getSelectedItem().toString();
     }
     
-    public int getCourtNumber() {
-        try{
+    public int getCourtNumber() 
+    {
+        try
+        {
             return Integer.parseInt(txtCourtNo.getText());
         }
-        catch(Exception ex){
+        catch(Exception ex)
+        {
             AppendLog("Please insert integer only.");
         }
         return 0;
     }
     
-    public void NextStep(){
+    public void NextStep()
+    {
         mainPanel.setSelectedIndex(1);
     }
-
 }

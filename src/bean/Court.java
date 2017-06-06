@@ -5,14 +5,14 @@
  */
 package bean;
 
-import java.io.Serializable;
 import jade.core.AID;
+import java.io.Serializable;
 
 public class Court implements Serializable
 {
-    private String courtType;
-    private int courtNumber;
     private AID provider;
+    private int courtNumber;
+    private String courtType;
 
     public String getCourtType() 
     {
@@ -24,15 +24,18 @@ public class Court implements Serializable
         this.courtType = courtType;
     }
     
-    public int getCourtNumber() {
+    public int getCourtNumber() 
+    {
         return courtNumber;
     }
 
-    public void setCourtNumber(int courtNumber) {
+    public void setCourtNumber(int courtNumber) 
+    {
         this.courtNumber = courtNumber;
     }
 
-    public AID getProvider() {
+    public AID getProvider() 
+    {
         return provider;
     }
 
