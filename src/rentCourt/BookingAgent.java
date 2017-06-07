@@ -30,17 +30,41 @@ public class BookingAgent extends Agent
                     if (msg.getPerformative() == ACLMessage.REQUEST) 
                     {
                         BookingDetail booking;
+                        boolean duplicate = false;
                         try
                         {   // Deserialize object that contain booking info
                             booking = (BookingDetail)Serializer.deserializeObjectFromString(msg.getContent()); 
-                            bookings.add(booking);
+                            
+                            for(BookingDetail b: bookings) 
+                            {
+                                if(b.getCourtType().equals(booking.getCourtType()) && b.getCourtNumber() == booking.getCourtNumber() && b.getTimeSlot() == booking.getTimeSlot()) 
+                                {
+                                    duplicate = true;
+                                }
+                            }
+                            
+                            if (duplicate) // Detect duplication in court
+                            {
+                                ACLMessage reply = new ACLMessage(ACLMessage.FAILURE);
+                                reply.setContent("Fail to book court, duplicate entry found!");
+                                reply.addReceiver(msg.getSender());
+                                send(reply);
+                            } 
+                            else 
+                            {
+                                ACLMessage reply = new ACLMessage(ACLMessage.CONFIRM);
+                                bookings.add(booking);;
+                                reply.setContent("Booking Added Successfully");
+                                reply.addReceiver(msg.getSender());
+                                send(reply);                 
+
+                                
+                            }
+                            
                         }
                         catch (Exception ex){}
                         
-                        ACLMessage reply = new ACLMessage(ACLMessage.CONFIRM);
-                        reply.setContent("Booking Added Successfully");
-                        reply.addReceiver(msg.getSender());
-                        send(reply); // Reply booked successful message to controller agent
+                        
                     } 
                     else if (msg.getPerformative() == ACLMessage.INFORM) 
                     {
